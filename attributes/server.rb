@@ -53,6 +53,15 @@ default['nagios']['server_name'] = node.has_key?(:domain) ? "nagios.#{domain}" :
 default['nagios']['ssl_req'] = '/C=US/ST=Several/L=Locality/O=Example/OU=Operations/' +
   "CN=#{node['nagios']['server_name']}/emailAddress=ops@#{node['nagios']['server_name']}"
 
+# log rotation method options are:
+#	n	= None - don't rotate the log
+#	h	= Hourly rotation (top of the hour)
+#	d	= Daily rotation (midnight every day)
+#	w	= Weekly rotation (midnight on Saturday evening)
+#	m	= Monthly rotation (midnight last day of month)
+# Defaults to 'none', assuming logrotate will be used
+default['nagios']['log_rotation_method'] = 'n'
+
 # for server from source installation
 default['nagios']['server']['url']      = 'http://prdownloads.sourceforge.net/sourceforge/nagios'
 default['nagios']['server']['version']  = '3.4.4'
