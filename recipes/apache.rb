@@ -16,7 +16,12 @@
 
 include_recipe "apache2"
 include_recipe "apache2::mod_rewrite"
-include_recipe "apache2::mod_php5"
+
+if node['platform'] == 'ubuntu' && Gem::Version.new(node['platform_version']) >= Gem::Version.new('16.04')
+  package 'libapache2-mod-php'
+else
+  include_recipe "apache2::mod_php5"
+end
 
 if node['nagios']['enable_ssl']
   include_recipe "apache2::mod_ssl"

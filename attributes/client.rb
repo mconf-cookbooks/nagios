@@ -66,7 +66,12 @@ default['nagios']['nrpe']['command_timeout']   = 60
 # for plugin from source installation
 default['nagios']['plugins']['url']      = 'https://www.nagios-plugins.org/download'
 default['nagios']['plugins']['version']  = '1.5'
-default['nagios']['plugins']['checksum'] = '5d426b0e303a5201073c342d8ddde8bafca1432b'
+
+if Gem::Version.new(Chef::VERSION) < Gem::Version.new('12.0')
+  default['nagios']['plugins']['checksum'] = '5d426b0e303a5201073c342d8ddde8bafca1432b'
+else
+  default['nagios']['plugins']['checksum'] = 'fcc55e23bbf1c70bcf1a90749d30249955d4668a9b776b2521da023c5c2f2170'
+end
 
 # for nrpe from source installation
 default['nagios']['nrpe']['url']      = 'http://prdownloads.sourceforge.net/sourceforge/nagios'
