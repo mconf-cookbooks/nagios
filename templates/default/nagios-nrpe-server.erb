@@ -1,6 +1,15 @@
 #!/bin/sh
-# Start/stop the nrpe daemon.
-#
+
+### BEGIN INIT INFO
+# Provides:          nrpe
+# Required-Start:
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start/stop the nrpe daemon
+# Description:       Start/stop the nrpe daemon
+### END INIT INFO
+
 # Contributed by Andrew Ryder 06-22-02
 # Slight mods by Ethan Galstad 07-09-02
 
@@ -30,7 +39,7 @@ test -f $NrpeBin || exit 0
 case "$1" in
 start)  echo -n "Starting nagios remote plugin daemon: <%= node['nagios']['nrpe']['service_name'] %>"
         start-stop-daemon --start --exec $NrpeBin -- -c $NrpeCfg -d
-        echo "." 
+        echo "."
         touch $LockFile
         ;;
 stop)   echo -n "Stopping nagios remote plugin daemon: <%= node['nagios']['nrpe']['service_name'] %>"
